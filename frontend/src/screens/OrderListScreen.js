@@ -23,12 +23,6 @@ const OrderListScreen = ({ history }) => {
     }
   }, [dispatch, history, userInfo]);
 
-  //   const deleteHandler = (id) => {
-  //     if (window.confirm("Are you sure?? ")) {
-  //       dispatch(deleteUser(id));
-  //     }
-  //   };
-
   return (
     <>
       <h1>Orders</h1>
@@ -71,7 +65,7 @@ const OrderListScreen = ({ history }) => {
                   )}
                 </td>
                 <td>
-                  <LinkContainer to={`/admin/order/${order._id}`}>
+                  <LinkContainer to={`/order/${order._id}`}>
                     <Button variant="light" className="btn-sm">
                       Details
                     </Button>
