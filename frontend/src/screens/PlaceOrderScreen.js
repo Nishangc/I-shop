@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import { createOrder } from "../actions/orderActions";
 import CheckoutSteps from "../components/CheckoutSteps";
+import { CART_CLEAR_METHOD } from "../constants/cartConstants";
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -33,8 +34,9 @@ const PlaceOrderScreen = ({ history }) => {
   useEffect(() => {
     if (success) {
       history.push(`/order/${order._id}`);
+      dispatch({ type: CART_CLEAR_METHOD });
     }
-  }, [history, success, order]);
+  }, [dispatch, history, success, order]);
 
   const placeOrderHandler = () => {
     dispatch(

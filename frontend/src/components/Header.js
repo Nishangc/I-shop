@@ -5,8 +5,9 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import SearchBox from "./SearchBox";
 import { Logout } from "../actions/userActions";
+import { CART_CLEAR_METHOD } from "../constants/cartConstants";
 
-const Header = () => {
+const Header = ({ history }) => {
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -14,6 +15,7 @@ const Header = () => {
 
   const logoutHandler = () => {
     dispatch(Logout());
+    dispatch({ type: CART_CLEAR_METHOD });
   };
 
   return (
@@ -37,9 +39,11 @@ const Header = () => {
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
-                  <NavDropdown.Item onClick={logoutHandler}>
-                    Logout
-                  </NavDropdown.Item>
+                  <LinkContainer to="/">
+                    <NavDropdown.Item onClick={logoutHandler}>
+                      Logout
+                    </NavDropdown.Item>
+                  </LinkContainer>
                 </NavDropdown>
               ) : (
                 <LinkContainer to="/login">
