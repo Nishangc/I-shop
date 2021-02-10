@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import {
   USER_DELETE_FAIL,
   USER_DELETE_REQUEST,
@@ -50,7 +51,7 @@ export const Login = (email, password) => async (dispatch) => {
       payload: data,
     });
 
-    localStorage.setItem("userInfo", JSON.stringify(data));
+    Cookies.set("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -63,7 +64,7 @@ export const Login = (email, password) => async (dispatch) => {
 };
 
 export const Logout = () => (dispatch) => {
-  localStorage.removeItem("userInfo");
+  Cookies.remove("userInfo");
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: MY_ORDER_LIST_RESET });
@@ -96,7 +97,7 @@ export const Register = (name, email, password) => async (dispatch) => {
       payload: data,
     });
 
-    localStorage.setItem("userInfo", JSON.stringify(data));
+    Cookies.set("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,

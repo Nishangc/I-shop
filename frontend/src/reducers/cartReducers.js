@@ -5,6 +5,7 @@ import {
   CART_SAVE_PAYMENT_METHOD,
   CART_SAVE_SHIPPING_ADDRESS,
 } from "../constants/cartConstants";
+import Cookies from "js-cookie";
 
 export const cartReducer = (
   state = { cartItems: [], shippingAddress: {} },
@@ -46,7 +47,8 @@ export const cartReducer = (
         paymentMethod: action.payload,
       };
     case CART_CLEAR_METHOD:
-      localStorage.setItem("cartItems", []);
+      Cookies.set("cartItems", []);
+
       return {
         cartItems: [],
       };

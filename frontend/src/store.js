@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
+import Cookies from "js-cookie";
 import { composeWithDevTools } from "redux-devtools-extension";
 import {
   productCreateReducer,
@@ -53,24 +54,24 @@ const reducer = combineReducers({
   myOrderList: myOrderListReducer,
 });
 
-const cartItemsFromStorage = localStorage.getItem("cartItems")
-  ? JSON.parse(localStorage.getItem("cartItems"))
+const cartItemsFromCookies = Cookies.get("cartItems")
+  ? JSON.parse(Cookies.get("cartItems"))
   : [];
 
-const userInfoFromStorage = localStorage.getItem("userInfo")
-  ? JSON.parse(localStorage.getItem("userInfo"))
+const userInfoFromCookies = Cookies.get("userInfo")
+  ? JSON.parse(Cookies.get("userInfo"))
   : null;
 
-const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
-  ? JSON.parse(localStorage.getItem("shippingAddress"))
+const shippingAddressFromCookies = Cookies.get("shippingAddress")
+  ? JSON.parse(Cookies.get("shippingAddress"))
   : {};
 
 const initialState = {
   cart: {
-    cartItems: cartItemsFromStorage,
-    shippingAddress: shippingAddressFromStorage,
+    cartItems: cartItemsFromCookies,
+    shippingAddress: shippingAddressFromCookies,
   },
-  userLogin: { userInfo: userInfoFromStorage },
+  userLogin: { userInfo: userInfoFromCookies },
 };
 
 const middleware = [thunk];
